@@ -5,3 +5,5 @@ string colour_str;
 void'($value$plusargs("colour=%0s", colour_str));
 
 colour_wrapper::from_name(colour_str, paradize.n_colour);
+
+
