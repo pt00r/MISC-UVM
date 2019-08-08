@@ -1,0 +1,37 @@
+      foreach(data[i])
+      begin
+         out = $psprintf("%0s %2h", out, data[i]);
+
+         if(i % 8 == 7)
+         begin
+            out = $psprintf("%0s\n", out);
+         end
+      end
+
+
+  // convert2string function
+  function string convert2string();
+    string s = super.convert2string();
+    s = { s, $psprintf( "\n")};
+    s = { s, $psprintf( "\n###################################################")};
+    s = { s, $psprintf( "\n###########   ETHERNET FRAME CONTENTS   ###########")};
+    s = { s, $psprintf( "\n###################################################")};
+    s = { s, $psprintf( "\n     src_addr       : %0h", src_addr)};
+    s = { s, $psprintf( "\n     dst_addr       : %0h", dst_addr)};
+    s = { s, $psprintf( "\n     tag_type       : %p",  tag_type)};
+    s = { s, $psprintf( "\n     vlan_tag       : %0h", vlan_tag)};
+    s = { s, $psprintf( "\n     s_vlan_tag     : %0h", s_vlan_tag)};
+    s = { s, $psprintf( "\n     eth_type_len   : %0h", eth_type_len)};
+    s = { s, $psprintf( "\n     payload_size   : %0d", payload_size)};
+    s = { s, $psprintf( "\n     payload        : ")};
+    foreach(payload[i]) begin
+      s = { s, $psprintf("  %2h", payload[i])};
+      if(i % 8 == 7) begin
+        s = { s, $psprintf("\n                      ")};
+      end
+    end
+    s = { s, $psprintf( "\n")};
+    s = { s, $psprintf( "\n###################################################")};
+    s = { s, $psprintf( "\n###################################################")};
+    return s;
+  endfunction : convert2string
